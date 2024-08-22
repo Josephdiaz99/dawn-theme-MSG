@@ -8,8 +8,7 @@
 
 1. [Documentación del Schema](#documentación-del-schema)
 2. [Desarrollo AJAX - Añadir al Carrito](#desarrollo-ajax---añadir-al-carrito)
-3. [Restricción de Productos en el Carrito](#restricción-de-productos-en-el-carrito)
-4. [Reemplazo de Productos en el Carrito](#reemplazo-de-productos-en-el-carrito)
+3. [Restricción y Reemplazo de Productos en el Carrito](#restricción-y-reemplazo-de-productos-en-el-carrito)
 
 ---
 
@@ -17,9 +16,17 @@
 
 ### Descripción
 
-El tema utiliza un esquema personalizado para construir la página de la lista de productos. Este esquema se basa en el archivo `schema.json` que define los parámetros y campos necesarios para la visualización de productos. Los campos permiten la personalización de la presentación y el diseño de la lista de productos en la tienda.
+El esquema de este tema se utiliza para construir la página de lista de productos en tu tienda Shopify. Está diseñado para ser flexible y permite ajustar la presentación de los productos a través de parámetros configurables en el archivo `schema.json`.
 
-### Ejemplo de Schema
+### Estructura del Schema
+
+El archivo `schema.json` define los siguientes parámetros:
+
+- **`name`**: El nombre de la sección que se mostrará en la administración de Shopify.
+- **`settings`**: Configuraciones para personalizar la apariencia y el comportamiento de la sección.
+- **`blocks`**: Definiciones para los bloques de contenido dentro de la sección.
+
+#### Ejemplo de Schema
 
 ```json
 {
