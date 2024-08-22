@@ -17,7 +17,7 @@
 
 ### Descripción
 
-El tema utiliza un esquema personalizado para construir la página de la lista de productos. Este esquema se basa en el archivo `schema.json` que define los parámetros y campos necesarios para la visualización de productos.
+El tema utiliza un esquema personalizado para construir la página de la lista de productos. Este esquema se basa en el archivo `schema.json` que define los parámetros y campos necesarios para la visualización de productos. Los campos permiten la personalización de la presentación y el diseño de la lista de productos en la tienda.
 
 ### Ejemplo de Schema
 
@@ -47,62 +47,4 @@ El tema utiliza un esquema personalizado para construir la página de la lista d
       "settings": []
     }
   ]
-}
-
-Cómo Utilizar
-Importar el archivo schema.json en tu tienda Shopify.
-Configura los parámetros en la sección de administración de Shopify según tus necesidades.
-
-Descripción
-La funcionalidad AJAX para añadir productos al carrito permite una experiencia de usuario fluida sin recargar la página.
-
-function addProductToCart(variantId, quantity) {
-  console.log('Obteniendo carrito actual...');
-  
-  fetch('/cart.js')
-    .then(response => response.json())
-    .then(cart => {
-      console.log('Carrito actual:', cart);
-
-      // Elimina todos los productos existentes
-      const deletePromises = cart.items.map(item => {
-        console.log('Preparando eliminación del producto:', item.key);
-        return fetch('/cart/change.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ line: item.key, quantity: 0 })
-        });
-      });
-
-      return Promise.all(deletePromises);
-    })
-    .then(() => {
-      console.log('Todos los productos eliminados. Agregando nuevo producto...');
-      
-      // Agrega el nuevo producto
-      return fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: quantity })
-      });
-    })
-    .then(response => response.json())
-    .then(cart => {
-      console.log('Nuevo producto añadido al carrito:', cart);
-      updateCartView();
-    })
-    .catch(error => {
-      console.error('Error al actualizar el carrito:', error);
-    });
-}
-
-function updateCartView() {
-  console.log('Actualizando vista del carrito...');
-  
-  fetch('/cart')
-    .then(response => response.text())
-    .then(html => {
-      console.log('Vista del carrito actualizada.');
-      document.querySelector('#cart-container').innerHTML = html;
-    });
 }
