@@ -1,17 +1,3 @@
-class CartRemoveButton extends HTMLElement {
-  constructor() {
-    super();
-
-    this.addEventListener('click', (event) => {
-      event.preventDefault();
-      const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
-      cartItems.updateQuantity(this.dataset.index, 0);
-    });
-  }
-}
-
-customElements.define('cart-remove-button', CartRemoveButton);
-
 class CartItems extends HTMLElement {
   constructor() {
     super();
@@ -146,17 +132,35 @@ class CartItems extends HTMLElement {
   updateQuantity(line, quantity, name, variantId) {
     this.enableLoading(line);
 
-    const body = JSON.stringify({
-      line,
-      quantity,
-      sections: this.getSectionsToRender().map((section) => section.section),
-      sections_url: window.location.pathname,
-    });
+    fetch(`${routes.cart_url}.json`, { method: 'GET' })
+      .then((response) => response.json())
+      .then((cart) => {
+        // Encuentra el índice del producto que se va a eliminar
+        const itemToRemove = cart.items.find(item => item.key === line);
 
-    fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-      .then((response) => {
-        return response.text();
+        if (itemToRemove) {
+          // Si hay un producto para eliminar, eliminamos solo ese producto
+          return fetch(`${routes.cart_change_url}`, {
+            ...fetchConfig(),
+            body: JSON.stringify({ line: itemToRemove.key, quantity: 0 }),
+          });
+        } else {
+          // Si no hay un producto para eliminar, simplemente continuamos
+          return Promise.resolve();
+        }
       })
+      .then(() => {
+        // Luego agregamos el nuevo producto
+        const body = JSON.stringify({
+          line,
+          quantity,
+          sections: this.getSectionsToRender().map((section) => section.section),
+          sections_url: window.location.pathname,
+        });
+
+        return fetch(`${routes.cart_change_url}`, { ...fetchConfig(), body });
+      })
+      .then((response) => response.text())
       .then((state) => {
         const parsedState = JSON.parse(state);
         const quantityElement =
@@ -184,6 +188,7 @@ class CartItems extends HTMLElement {
             section.selector
           );
         });
+
         const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
         let message = '';
         if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
@@ -265,22 +270,3 @@ class CartItems extends HTMLElement {
 }
 
 customElements.define('cart-items', CartItems);
-
-if (!customElements.get('cart-note')) {
-  customElements.define(
-    'cart-note',
-    class CartNote extends HTMLElement {
-      constructor() {
-        super();
-
-        this.addEventListener(
-          'input',
-          debounce((event) => {
-            const body = JSON.stringify({ note: event.target.value });
-            fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } });
-          }, ON_CHANGE_DEBOUNCE_TIMER)
-        );
-      }
-    }
-  );
-}
