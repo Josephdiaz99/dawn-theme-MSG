@@ -19,6 +19,8 @@ if (!customElements.get('product-form')) {
 
       onSubmitHandler(evt) {
         evt.preventDefault();
+
+        // Evita el envío si el botón está deshabilitado
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
         this.handleErrorMessage();
@@ -32,20 +34,36 @@ if (!customElements.get('product-form')) {
         delete config.headers['Content-Type'];
 
         const formData = new FormData(this.form);
-        if (this.cart) {
-          formData.append(
-            'sections',
-            this.cart.getSectionsToRender().map((section) => section.id)
-          );
-          formData.append('sections_url', window.location.pathname);
-          this.cart.setActiveElement(document.activeElement);
-        }
-        config.body = formData;
 
-        fetch(`${routes.cart_add_url}`, config)
+        // Obtén la URL para vaciar el carrito
+        const emptyCartUrl = `${routes.cart_url}/clear`;
+
+        // Vacía el carrito antes de agregar el nuevo producto
+        fetch(emptyCartUrl, {
+          method: 'POST',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+        })
+          .then(() => {
+            // Una vez que el carrito esté vacío, añade el nuevo producto
+            if (this.cart) {
+              formData.append(
+                'sections',
+                this.cart.getSectionsToRender().map((section) => section.id)
+              );
+              formData.append('sections_url', window.location.pathname);
+              this.cart.setActiveElement(document.activeElement);
+            }
+            config.body = formData;
+
+            // Realiza la solicitud para añadir el producto al carrito
+            return fetch(`${routes.cart_add_url}`, config);
+          })
           .then((response) => response.json())
           .then((response) => {
             if (response.status) {
+              // Muestra el mensaje de error si ocurre algún problema
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
                 productVariantId: formData.get('id'),
@@ -66,6 +84,7 @@ if (!customElements.get('product-form')) {
               return;
             }
 
+            // Publica el evento de actualización del carrito si no hay errores
             if (!this.error)
               publish(PUB_SUB_EVENTS.cartUpdate, {
                 source: 'product-form',
@@ -73,6 +92,7 @@ if (!customElements.get('product-form')) {
                 cartData: response,
               });
             this.error = false;
+
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
               document.body.addEventListener(
