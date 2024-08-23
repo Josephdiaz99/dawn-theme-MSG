@@ -46,7 +46,7 @@ class CartItems extends HTMLElement {
     const index = event.target.dataset.index;
     const maxQuantity = 1; // Limita la cantidad máxima a 1 por cada servicio
     let message = '';
-
+    console.log('holaaaaaaa');
     // Verifica si el valor es mayor a 1 (solo se permite 1 producto por servicio)
     if (inputValue > maxQuantity) {
       message = `Solo puedes agregar un producto de este servicio al carrito.`;
