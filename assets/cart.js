@@ -44,19 +44,19 @@ class CartItems extends HTMLElement {
   validateQuantity(event) {
     const inputValue = parseInt(event.target.value);
     const index = event.target.dataset.index;
+    const maxQuantity = 1; // Limita la cantidad máxima a 1 por cada servicio
     let message = '';
 
-    if (inputValue < event.target.dataset.min) {
-      message = window.quickOrderListStrings.min_error.replace('[min]', event.target.dataset.min);
-    } else if (inputValue > parseInt(event.target.max)) {
-      message = window.quickOrderListStrings.max_error.replace('[max]', event.target.max);
-    } else if (inputValue % parseInt(event.target.step) !== 0) {
-      message = window.quickOrderListStrings.step_error.replace('[step]', event.target.step);
+    // Verifica si el valor es mayor a 1 (solo se permite 1 producto por servicio)
+    if (inputValue > maxQuantity) {
+      message = `Solo puedes agregar un producto de este servicio al carrito.`;
     }
 
     if (message) {
+      // Si hay un mensaje de error, lo muestra al usuario
       this.setValidity(event, index, message);
     } else {
+      // Si todo está correcto, actualiza el carrito
       event.target.setCustomValidity('');
       event.target.reportValidity();
       this.updateQuantity(
@@ -136,7 +136,7 @@ class CartItems extends HTMLElement {
       .then((response) => response.json())
       .then((cart) => {
         // Encuentra el índice del producto que se va a eliminar
-        const itemToRemove = cart.items.find(item => item.key === line);
+        const itemToRemove = cart.items.find((item) => item.key === line);
 
         if (itemToRemove) {
           // Si hay un producto para eliminar, eliminamos solo ese producto
