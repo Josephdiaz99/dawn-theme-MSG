@@ -46,6 +46,7 @@ El tema utiliza un esquema personalizado para construir la página de la lista d
     }
   ]
 }
+```
 
 
 ## Desarrollo AJAX - Añadir al Carrito
@@ -112,3 +113,4 @@ validateQuantity(event) {
     );
   }
 }
+```
