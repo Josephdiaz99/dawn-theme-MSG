@@ -8,6 +8,24 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "All Products",
+    "settings": [
+      {
+        "type": "text",
+        "id": "page_title",
+        "label": "Page Title",
+        "default": "All Products"
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "name": "Default",
+        "category": "Custom"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
@@ -1467,3 +1485,4 @@
     ]
   }
 ]
+
