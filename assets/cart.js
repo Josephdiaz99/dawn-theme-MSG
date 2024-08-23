@@ -74,6 +74,7 @@ class CartItems extends HTMLElement {
 
   onCartUpdate() {
     if (this.tagName === 'CART-DRAWER-ITEMS') {
+      // Actualizar el carrito en el carrito desplegable (cart drawer)
       fetch(`${routes.cart_url}?section_id=cart-drawer`)
         .then((response) => response.text())
         .then((responseText) => {
@@ -91,12 +92,31 @@ class CartItems extends HTMLElement {
           console.error(e);
         });
     } else {
+      // Actualizar el carrito en la vista principal
       fetch(`${routes.cart_url}?section_id=main-cart-items`)
         .then((response) => response.text())
         .then((responseText) => {
           const html = new DOMParser().parseFromString(responseText, 'text/html');
-          const sourceQty = html.querySelector('cart-items');
-          this.innerHTML = sourceQty.innerHTML;
+          const cartItems = html.querySelector('cart-items');
+
+          // Verifica el contenido del carrito para asegurarse de que solo hay un producto
+          const items = cartItems ? cartItems.querySelectorAll('.cart-item') : [];
+          if (items.length > 1) {
+            // Si hay más de un producto, elimina los extras
+            items.forEach((item, index) => {
+              if (index > 0) {
+                const line = item.getAttribute('data-line');
+                fetch(`${routes.cart_change_url}`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ line: line, quantity: 0 }),
+                });
+              }
+            });
+          }
+
+          // Actualiza la vista del carrito
+          this.innerHTML = cartItems ? cartItems.innerHTML : '';
         })
         .catch((e) => {
           console.error(e);
