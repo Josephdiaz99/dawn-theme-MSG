@@ -73,52 +73,42 @@ class CartItems extends HTMLElement {
   }
 
   onCartUpdate() {
+    // Verifica si el elemento actual es un 'CART-DRAWER-ITEMS'
     if (this.tagName === 'CART-DRAWER-ITEMS') {
-      // Actualizar el carrito en el carrito desplegable (cart drawer)
+      // Si es un 'CART-DRAWER-ITEMS', realiza una solicitud para obtener el contenido del carrito en el cajón del carrito (drawer)
       fetch(`${routes.cart_url}?section_id=cart-drawer`)
-        .then((response) => response.text())
+        .then((response) => response.text()) // Obtiene la respuesta como texto
         .then((responseText) => {
+          // Convierte el texto de la respuesta en un documento HTML
           const html = new DOMParser().parseFromString(responseText, 'text/html');
+          // Define los selectores de las secciones que necesitan ser actualizadas
           const selectors = ['cart-drawer-items', '.cart-drawer__footer'];
+          // Recorre cada selector para actualizar las secciones correspondientes
           for (const selector of selectors) {
-            const targetElement = document.querySelector(selector);
-            const sourceElement = html.querySelector(selector);
+            const targetElement = document.querySelector(selector); // Selecciona el elemento actual en el DOM
+            const sourceElement = html.querySelector(selector); // Selecciona el elemento nuevo del documento HTML de respuesta
             if (targetElement && sourceElement) {
-              targetElement.replaceWith(sourceElement);
+              targetElement.replaceWith(sourceElement); // Reemplaza el elemento en el DOM con el nuevo contenido
             }
           }
         })
         .catch((e) => {
+          // Maneja cualquier error que ocurra durante la solicitud
           console.error(e);
         });
     } else {
-      // Actualizar el carrito en la vista principal
+      // Si no es un 'CART-DRAWER-ITEMS', realiza una solicitud para obtener el contenido del carrito principal
       fetch(`${routes.cart_url}?section_id=main-cart-items`)
-        .then((response) => response.text())
+        .then((response) => response.text()) // Obtiene la respuesta como texto
         .then((responseText) => {
+          // Convierte el texto de la respuesta en un documento HTML
           const html = new DOMParser().parseFromString(responseText, 'text/html');
-          const cartItems = html.querySelector('cart-items');
-
-          // Verifica el contenido del carrito para asegurarse de que solo hay un producto
-          const items = cartItems ? cartItems.querySelectorAll('.cart-item') : [];
-          if (items.length > 1) {
-            // Si hay más de un producto, elimina los extras
-            items.forEach((item, index) => {
-              if (index > 0) {
-                const line = item.getAttribute('data-line');
-                fetch(`${routes.cart_change_url}`, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ line: line, quantity: 0 }),
-                });
-              }
-            });
-          }
-
-          // Actualiza la vista del carrito
-          this.innerHTML = cartItems ? cartItems.innerHTML : '';
+          // Selecciona el nuevo contenido del carrito desde el documento HTML de respuesta
+          const sourceQty = html.querySelector('cart-items');
+          this.innerHTML = sourceQty.innerHTML; // Actualiza el contenido del elemento actual con el nuevo contenido
         })
         .catch((e) => {
+          // Maneja cualquier error que ocurra durante la solicitud
           console.error(e);
         });
     }
