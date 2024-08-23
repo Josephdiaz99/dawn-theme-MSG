@@ -1,4 +1,4 @@
-# Documentación del Proyecto de Tema Shopify - Dawn
+# Documentación del Proyecto de Tema Shopify - Dawn Josephmar Díaz
 
 Bienvenido al repositorio del tema Shopify Dawn. Este archivo README proporciona una guía detallada sobre cómo funciona el tema, incluyendo la documentación del schema para la página de lista de productos, el desarrollo de la funcionalidad AJAX para añadir productos al carrito, y cómo se maneja la restricción de añadir más de un producto al carrito.
 
