@@ -1,0 +1,15 @@
+{% comment %}
+Aquí se asume que `collection.products` contiene los productos que deseas mostrar.
+{% endcomment %}
+
+<div class="product-list">
+  {% for product in collection.products %}
+    {% unless product.tags contains 'hide-from-front-end' %}
+      <div class="product-item">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.price | money }}</p>
+        <button class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
+      </div>
+    {% endunless %}
+  {% endfor %}
+</div>
