@@ -1,1 +1,102 @@
-{"sections":{"banner":{"type":"main-collection-banner","settings":{"show_collection_description":true,"show_collection_image":false,"color_scheme":"scheme-1"}},"product-grid":{"type":"main-collection-product-grid","settings":{"products_per_page":16,"columns_desktop":4,"color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","enable_filtering":true,"filter_type":"horizontal","enable_sorting":true,"columns_mobile":"2","padding_top":36,"padding_bottom":36}},"multicolumn_GpPaVE":{"type":"multicolumn","blocks":{"column_VQVfPM":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/avatar.webp","title":"Joseph Douglas","text":"<p>\"He adquirido el paquete de desarrollo de 40 horas y no puedo estar más satisfecho con los resultados. El equipo de <strong>NovaSoftApp<\/strong> es increíblemente profesional y siempre están disponibles para resolver cualquier duda. Gracias a ellos, mi plataforma ha mejorado su rendimiento y ahora mis clientes tienen una experiencia mucho más fluida. ¡Altamente recomendado!\"<\/p>","link_label":"","link":""}},"column_QDRUpi":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/avatar2.webp","title":"Peter Jackson","text":"<p>\"Contraté el paquete de 20 horas de desarrollo y la atención personalizada fue excepcional. En todo momento sentí que mis necesidades eran la prioridad. El equipo es muy eficiente y el trabajo entregado fue impecable. <strong>NovaSoftApp<\/strong> no solo cumplió con mis expectativas, sino que las superó. Sin duda, volveré a contratar sus servicios.\"<\/p>","link_label":"","link":""}},"column_wb7YEe":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/avatar3.webp","title":"Michael Petersen","text":"<p>\"Decidí invertir en el paquete de 60 horas de desarrollo y fue la mejor decisión que pude haber tomado para mi negocio. <strong>NovaSoftApp<\/strong> ha transformado por completo mi plataforma digital, optimizando cada detalle. Me encantó su nivel de compromiso y el seguimiento constante durante el proyecto. Si buscas resultados de calidad, <strong>NovaSoftApp<\/strong> es la mejor opción.\"<\/p>","link_label":"","link":""}}},"block_order":["column_VQVfPM","column_QDRUpi","column_wb7YEe"],"settings":{"title":"Opiniones","heading_size":"h1","image_width":"full","image_ratio":"adapt","columns_desktop":3,"column_alignment":"center","background_style":"primary","button_label":"Button label","button_link":"","color_scheme":"","columns_mobile":"1","swipe_on_mobile":false,"padding_top":36,"padding_bottom":36}}},"order":["banner","product-grid","multicolumn_GpPaVE"]}
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_GpPaVE": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_VQVfPM": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/avatar.webp",
+            "title": "Joseph Douglas",
+            "text": "<p>\"He adquirido el paquete de desarrollo de 40 horas y no puedo estar más satisfecho con los resultados. El equipo de <strong>NovaSoftApp<\/strong> es increíblemente profesional y siempre están disponibles para resolver cualquier duda. Gracias a ellos, mi plataforma ha mejorado su rendimiento y ahora mis clientes tienen una experiencia mucho más fluida. ¡Altamente recomendado!\"<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_QDRUpi": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/avatar2.webp",
+            "title": "Peter Jackson",
+            "text": "<p>\"Contraté el paquete de 20 horas de desarrollo y la atención personalizada fue excepcional. En todo momento sentí que mis necesidades eran la prioridad. El equipo es muy eficiente y el trabajo entregado fue impecable. <strong>NovaSoftApp<\/strong> no solo cumplió con mis expectativas, sino que las superó. Sin duda, volveré a contratar sus servicios.\"<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_wb7YEe": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/avatar3.webp",
+            "title": "Michael Petersen",
+            "text": "<p>\"Decidí invertir en el paquete de 60 horas de desarrollo y fue la mejor decisión que pude haber tomado para mi negocio. <strong>NovaSoftApp<\/strong> ha transformado por completo mi plataforma digital, optimizando cada detalle. Me encantó su nivel de compromiso y el seguimiento constante durante el proyecto. Si buscas resultados de calidad, <strong>NovaSoftApp<\/strong> es la mejor opción.\"<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_VQVfPM",
+        "column_QDRUpi",
+        "column_wb7YEe"
+      ],
+      "settings": {
+        "title": "Opiniones",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "button_label": "Ver productos",
+        "button_link": "shopify:\/\/collections\/frontpage",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "multicolumn_GpPaVE"
+  ]
+}
