@@ -373,7 +373,7 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-   <script id="conversion-config" type="application/json">
+<script id="conversion-config" type="application/json">
 {
   "show": {{ localization.market.metafields.custom.mostrar_conversion.value | default: false | json }},
   "currency": {{ localization.market.metafields.custom.moneda_objetivo.value | default: "" | json }},
