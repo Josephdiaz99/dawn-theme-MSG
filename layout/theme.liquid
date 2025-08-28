@@ -382,31 +382,28 @@
 </script>
 
 <script>
-(function() {
-  try {
-    const cfgEl = document.getElementById('conversion-config');
-    if (!cfgEl) return;
-    const cfg = JSON.parse(cfgEl.textContent || "{}");
-    const show = !!cfg.show;
-    const rate = Number(cfg.rate || 0);
-    const currency = cfg.currency || "";
+document.addEventListener("DOMContentLoaded", function () {
+  // Aquí puedes meter dinámicamente el market, currency, rate, etc.
+  const market = "US";
+  const currency = "EUR";
+  const rate = "0.93";
 
-    console.log(show, rate, current)
-
-
-    fetch('/cart/update.js', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        attributes: {
-          '_show_conversion': String(show),
-          '_target_currency': currency,
-          '_exchange_rate': String(rate)
-        }
-      })
-    });
-  } catch(e) {}
-})();
+  fetch('/cart/update.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      attributes: {
+        _market: market,
+        _currency: currency,
+        _rate: rate
+      }
+    })
+  })
+  .then(r => r.json())
+  .then(d => console.log("Cart actualizado con atributos:", d))
+  .catch(err => console.error("Error al actualizar atributos del carrito:", err));
+});
 </script>
+
   </body>
 </html>
