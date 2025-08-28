@@ -306,10 +306,9 @@
     {%- if settings.cart_type == 'drawer' -%}
       {%- render 'cart-drawer' -%}
     {%- endif -%}
-{% if market.metafields.custom.show_conversion == true %}
-  Mostrar en {{ market.metafields.custom.target_currency }} con tasa 
-  {{ market.metafields.custom.exchange_rate }}
-{% endif %}
+  "show": {{ localization.market.metafields.custom.mostrar_conversion.value | default: false | json }},
+  "currency": {{ localization.market.metafields.custom.moneda_objetivo.value | default: "" | json }},
+  "rate": {{ localization.market.metafields.custom.mostrar_conversion.value | default: 0 | json }}
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
