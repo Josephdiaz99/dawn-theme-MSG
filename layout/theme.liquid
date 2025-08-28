@@ -299,8 +299,6 @@
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
-
-     {% render 'conversion-attributes' %}
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -375,6 +373,41 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-   
+   <script id="conversion-config" type="application/json">
+{
+  "show": {{ market.metafields.custom.mostrar_conversion.value | default: false | json }},
+  "currency": {{ market.metafields.custom.moneda_objetivo.value | default: "" | json }},
+  "rate": {{ market.metafields.custom.mostrar_conversion.value | default: 0 | json }}
+}
+</script>
+
+<script>
+(function() {
+  try {
+    const cfgEl = document.getElementById('conversion-config');
+    if (!cfgEl) return;
+    const cfg = JSON.parse(cfgEl.textContent || "{}");
+    const show = !!cfg.show;
+    const rate = Number(cfg.rate || 0);
+    const currency = cfg.currency || "";
+
+    console.log(show, rate, current)
+
+    if (!show || !currency || !rate) return;
+
+    fetch('/cart/update.js', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        attributes: {
+          '_show_conversion': String(show),
+          '_target_currency': currency,
+          '_exchange_rate': String(rate)
+        }
+      })
+    });
+  } catch(e) {}
+})();
+</script>
   </body>
 </html>
