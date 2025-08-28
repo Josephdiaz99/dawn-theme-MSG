@@ -16,6 +16,8 @@
     const rate = Number(cfg.rate || 0);
     const currency = cfg.currency || "";
 
+    console.log(show, rate, current)
+
     if (!show || !currency || !rate) return;
 
     fetch('/cart/update.js', {
