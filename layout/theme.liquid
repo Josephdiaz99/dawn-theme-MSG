@@ -382,57 +382,31 @@
 </script>
 
 <script>
-(function() {
-  try {
-    const cfgEl = document.getElementById('conversion-config');
-    console.log('helo')
-    console.log(cfgEl,'helfdsfdso')
-    if (!cfgEl) return;
-      console.log('helo2')
-    const cfg = JSON.parse(cfgEl.textContent || "{}");
-    const show = cfg.show;
-    const rate = Number(cfg.rate || 0);
-    const currency = cfg.currency || "";
-
-    console.log(show, rate, current, "lololo")
-
-
-    fetch('/cart/update.js', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        attributes: {
-          '_show_conversion': String(show),
-          '_target_currency': currency,
-          '_exchange_rate': String(rate)
-        }
-      })
-    });
-  } catch(e) {}
-})();
-</script>
-
-<script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Aquí puedes meter dinámicamente el market, currency, rate, etc.
-  const market = "US";
-  const currency = "EUR";
-  const rate = "0.93";
+  const cfgEl = document.getElementById('conversion-config');
+  if (!cfgEl) return;
+
+  const cfg = JSON.parse(cfgEl.textContent || "{}");
+  const show = cfg.show;
+  const currency = cfg.currency;
+  const rate = Number(cfg.rate);
+
+  if (!show || !currency || !rate) return;
 
   fetch('/cart/update.js', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       attributes: {
-        _market: market,
-        _currency: currency,
-        _rate: rate
+        '_show_conversion': String(show),
+        '_target_currency': currency,
+        '_exchange_rate': String(rate)
       }
     })
   })
-  .then(r => r.json())
-  .then(d => console.log("Cart actualizado con atributos:", d))
-  .catch(err => console.error("Error al actualizar atributos del carrito:", err));
+  .then(response => response.json())
+  .then(data => console.log("Carrito actualizado con atributos:", data))
+  .catch(err => console.error("Error actualizando atributos del carrito:", err));
 });
 </script>
   </body>
