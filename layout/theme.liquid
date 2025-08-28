@@ -375,9 +375,9 @@
 
 <script id="conversion-config" type="application/json">
 {
-  "show": {{ market.metafields.custom.mostrar_conversion.value | default: false | json }},
-  "currency": {{ market.metafields.custom.moneda_objetivo.value | default: "" | json }},
-  "rate": {{ market.metafields.custom.tipo_de_cambio.value | default: 0 | json }}
+  "show": {{ localization.market.metafields.custom.mostrar_conversion.value | default: false | json }},
+  "currency": {{ localization.market.metafields.custom.moneda_objetivo.value | default: "" | json }},
+  "rate": {{ localization.market.metafields.custom.tipo_de_cambio.value | default: 0 | json }}
 }
 </script>
 
