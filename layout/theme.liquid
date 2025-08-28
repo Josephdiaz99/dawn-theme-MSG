@@ -386,7 +386,9 @@
   try {
     const cfgEl = document.getElementById('conversion-config');
     console.log('helo')
+    console.log(cfgEl,'helo')
     if (!cfgEl) return;
+      console.log('helo2')
     const cfg = JSON.parse(cfgEl.textContent || "{}");
     const show = cfg.show;
     const rate = Number(cfg.rate || 0);
